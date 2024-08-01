@@ -7,13 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const [referralCode, setReferralCode] = useState<string>("");
   const context = useContext(AppContext);
   const router = useRouter();
-  const { toast } = useToast();
+  // const responses = JSON.parse(localStorage.getItem("responseData") || "");
+
+  function notify(message: string) {
+    toast(message);
+  }
 
   const handleReferral = async () => {
     try {
@@ -21,23 +25,17 @@ export default function Home() {
         user_id: context.user.id,
         referral_code: referralCode,
       };
+      console.log(body);
 
       const response = await axios.post(
         "https://3346-27-4-39-6.ngrok-free.app/user/add-referral",
         body
       );
-      console.log("Signup success", response.data);
-      router.push("/");
-      toast({
-        variant: "destructive",
-        title: response.data.message,
-      });
+      console.log(response.data);
+      notify(response.data.message);
     } catch (error: any) {
-      console.log("Signup failed", error.message);
-      toast({
-        variant: "destructive",
-        title: "Referral Failed",
-      });
+      console.log("Referral failed", error.message);
+      notify(error.message);
     }
   };
 
@@ -51,7 +49,7 @@ export default function Home() {
                 Referral Program
               </h1>
               <div className="border border-input bg-background hover:bg-accent hover:text-accent-foreground h-fit px-4 py-2 rounded-md">
-                Referral code : {context.referral}
+                Referral code : {context.user.referral}
               </div>
             </div>
             <div className="flex flex-col justify-center my-6 px-8">
@@ -93,6 +91,7 @@ export default function Home() {
         )}
       </div>
       <BackgroundBeams />
+      <Toaster />
     </div>
   );
 }

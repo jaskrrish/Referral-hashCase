@@ -52,6 +52,7 @@ export default function Signup() {
       );
       console.log("Signup success", response.data);
       console.log(response.data.user.referral_code);
+      localStorage.setItem("responseData", JSON.stringify(response.data));
       context.setUser({
         id: response.data.user.id,
         referral: response.data.user.referral_code,
@@ -71,7 +72,9 @@ export default function Signup() {
         <Card className="w-[350px]">
           <CardHeader>
             <CardTitle>Sign-Up</CardTitle>
-            <CardDescription>Register yourself in the Banao</CardDescription>
+            <CardDescription>
+              Register yourself in the Hash Case
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form>
@@ -106,11 +109,6 @@ export default function Signup() {
           <div className="flex justify-center">
             <Button onClick={onSignup}>Signup</Button>
           </div>
-          <CardFooter className="flex justify-center mt-2">
-            <Link href="/login" className="text-blue-800">
-              Already have an Account?
-            </Link>
-          </CardFooter>
         </Card>
       </div>
 
