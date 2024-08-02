@@ -47,7 +47,7 @@ export default function Signup() {
       };
 
       const response = await axios.post(
-        "https://tomcat-wondrous-cheaply.ngrok-free.app/dev/register-user",
+        "https://cbb7-110-224-92-238.ngrok-free.app/dev/register-user",
         body,
         { headers }
       );

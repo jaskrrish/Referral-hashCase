@@ -39,6 +39,7 @@ export default function ReferralPage() {
   console.log(storedResponse);
 
   const [tableData, setTableData] = useState([]);
+  console.log(tableData.length);
 
   function notify(message: string) {
     toast(message);
@@ -53,7 +54,7 @@ export default function ReferralPage() {
       console.log(body);
 
       const response = await axios.post(
-        "https://tomcat-wondrous-cheaply.ngrok-free.app/user/add-referral",
+        "https://cbb7-110-224-92-238.ngrok-free.app/user/add-referral",
         body
       );
       console.log(response.data);
@@ -76,12 +77,14 @@ export default function ReferralPage() {
       };
       try {
         const response = await axios.post(
-          `https://tomcat-wondrous-cheaply.ngrok-free.app/user/referrals`,
+          `https://cbb7-110-224-92-238.ngrok-free.app/user/referrals`,
           body
         );
         console.log(response.data);
         console.log(response.data.referredto);
-        setTableData(response.data.referredto);
+        if (response.data.referredto !== "No referrals yet") {
+          setTableData(response.data.referredto);
+        }
       } catch (error: any) {
         console.log("Referral failed", error.message);
         notify(error.message);
@@ -127,7 +130,7 @@ export default function ReferralPage() {
         </Card>
       </div>
       <div>
-        {tableData.length && (
+        {tableData.length > 1 ? (
           <Table className="w-full">
             <TableHeader>
               <TableRow>
@@ -150,7 +153,7 @@ export default function ReferralPage() {
               </TableRow>
             </TableFooter>
           </Table>
-        )}
+        ) : null}
       </div>
       <Toaster />
     </div>
