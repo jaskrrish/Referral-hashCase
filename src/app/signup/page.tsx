@@ -59,7 +59,9 @@ export default function Signup() {
         referral: response.data.user.referral_code,
       });
       notify(response.data.message);
-      router.push("/referral");
+      setTimeout(() => {
+        router.push("/referral");
+      }, 5000);
     } catch (error: any) {
       console.log("Signup failed", error.message);
       notify(error.message);
