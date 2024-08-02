@@ -46,7 +46,8 @@ export default function Home() {
             </div>
             <div className="flex gap-x-4 my-6">
               <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
-                Refer a friend and earn rewards
+                Refer a friend and earn{" "}
+                <span className="text-[#CFA9FB]">rewards</span>
               </h1>
             </div>
             <div className="my-8 flex justify-center">
@@ -68,8 +69,9 @@ export default function Home() {
                 className="h-20 w-20"
               />
             </div>
-            <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
-              Join the Hash Case <br /> Referral Program
+            <h1 className="relative z-10 text-lg md:text-7xl text-neutral-200 text-center font-sans font-bold">
+              Join the Hash Case <br />{" "}
+              <span className="text-[#CFA9FB]"> Referral Program </span>
             </h1>
             <div className="my-8 flex justify-center">
               <Link href="/signup">

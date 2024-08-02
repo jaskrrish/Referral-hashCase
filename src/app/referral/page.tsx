@@ -8,10 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
@@ -26,6 +36,10 @@ export default function ReferralPage() {
     localStorage.getItem("responseData") || "{}"
   );
 
+  console.log(storedResponse);
+
+  const [tableData, setTableData] = useState([]);
+
   function notify(message: string) {
     toast(message);
   }
@@ -39,7 +53,7 @@ export default function ReferralPage() {
       console.log(body);
 
       const response = await axios.post(
-        "https://3346-27-4-39-6.ngrok-free.app/user/add-referral",
+        "https://tomcat-wondrous-cheaply.ngrok-free.app/user/add-referral",
         body
       );
       console.log(response.data);
@@ -54,8 +68,30 @@ export default function ReferralPage() {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const body = {
+        userId: storedResponse.user.id,
+        identifier: storedResponse.user.identifier,
+      };
+      try {
+        const response = await axios.post(
+          `https://tomcat-wondrous-cheaply.ngrok-free.app/user/referrals`,
+          body
+        );
+        console.log(response.data);
+        console.log(response.data.referredto);
+        setTableData(response.data.referredto);
+      } catch (error: any) {
+        console.log("Referral failed", error.message);
+        notify(error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+    <div className="h-screen w-full bg-neutral-950 relative flex gap-x-8 items-center justify-center antialiased">
       <div className="z-20">
         <Card className="w-[350px]">
           <CardHeader>
@@ -89,6 +125,32 @@ export default function ReferralPage() {
             </Link>
           </CardFooter>
         </Card>
+      </div>
+      <div>
+        {tableData.length && (
+          <Table className="w-full">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-full text-white">Referrals</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {tableData.map((referral, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium text-white w-full">
+                    {referral}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={3}>Total</TableCell>
+                <TableCell className="text-right">{tableData.length}</TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        )}
       </div>
       <Toaster />
     </div>
