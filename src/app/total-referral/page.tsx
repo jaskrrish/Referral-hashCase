@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/table";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
 
 export default function TotalReferral() {
   const storedResponse = JSON.parse(
@@ -18,10 +17,6 @@ export default function TotalReferral() {
   );
 
   const [tableData, setTableData] = useState([]);
-
-  function notify(message: string) {
-    toast(message);
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +35,6 @@ export default function TotalReferral() {
         }
       } catch (error: any) {
         console.log("Referral failed", error.message);
-        notify(error.message);
       }
     };
     fetchData();
@@ -76,7 +70,6 @@ export default function TotalReferral() {
           <div className="text-white text-xl font-bold">No referrals yet</div>
         )}
       </div>
-      <Toaster />
     </div>
   );
 }
