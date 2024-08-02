@@ -71,7 +71,7 @@ export default function Signup() {
   return (
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <div className="z-20">
-        <Card className="w-[350px]">
+        <Card className="w-[450px]">
           <CardHeader>
             <CardTitle>Sign-Up</CardTitle>
             <CardDescription>
@@ -109,7 +109,9 @@ export default function Signup() {
             </form>
           </CardContent>
           <div className="flex justify-center mb-4">
-            <Button onClick={onSignup}>Signup</Button>
+            <Button onClick={onSignup} className="text-lg font-semibold">
+              Signup
+            </Button>
           </div>
         </Card>
       </div>

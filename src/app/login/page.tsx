@@ -87,9 +87,6 @@ export default function Login() {
                     type="password"
                     placeholder="Password"
                   />
-                  <Link href="/forget-password">
-                    <p className="text-right">Forget Password?</p>
-                  </Link>
                 </div>
               </div>
             </form>
