@@ -1,21 +1,18 @@
 "use client";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { AppContext } from "@/context";
 
 interface User {
@@ -31,6 +28,10 @@ export default function Signup() {
     phoneNumber: "",
   });
   const [loading, setLoading] = useState(false);
+
+  function notify(message: string) {
+    toast(message);
+  }
 
   const onSignup = async () => {
     try {
@@ -57,10 +58,11 @@ export default function Signup() {
         id: response.data.user.id,
         referral: response.data.user.referral_code,
       });
-      router.push("/");
+      notify(response.data.message);
+      router.push("/referral");
     } catch (error: any) {
       console.log("Signup failed", error.message);
-      toast.error(error.message);
+      notify(error.message);
     } finally {
       setLoading(false);
     }
@@ -100,19 +102,18 @@ export default function Signup() {
                     onChange={(e) =>
                       setUser({ ...user, phoneNumber: e.target.value })
                     }
-                    placeholder="Password"
+                    placeholder="Phone Number"
                   />
                 </div>
               </div>
             </form>
           </CardContent>
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-4">
             <Button onClick={onSignup}>Signup</Button>
           </div>
         </Card>
       </div>
-
-      <BackgroundBeams />
+      <Toaster />
     </div>
   );
 }

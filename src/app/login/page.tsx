@@ -1,5 +1,4 @@
 "use client";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -105,8 +104,6 @@ export default function Login() {
           </CardFooter>
         </Card>
       </div>
-
-      <BackgroundBeams />
     </div>
   );
 }
