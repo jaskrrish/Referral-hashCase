@@ -6,8 +6,25 @@ import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import HashCaseTextLogo from "../../public/hashcaselogo.png";
 
+interface User {
+  badges: string;
+  id: number;
+  email: string;
+  eth_wallet_address: string;
+  owner_id: number;
+  identifier: string;
+  private_key: string;
+  referral_code: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface ResponseData {
+  user: User;
+}
+
 export default function Home() {
-  const storedResponse = JSON.parse(
+  const storedResponse: ResponseData = JSON.parse(
     localStorage.getItem("responseData") || "{}"
   );
   console.log(storedResponse);

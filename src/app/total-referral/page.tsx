@@ -10,9 +10,25 @@ import {
 } from "@/components/ui/table";
 import { useState, useEffect } from "react";
 import axios from "axios";
+interface User {
+  badges: string;
+  id: number;
+  email: string;
+  eth_wallet_address: string;
+  owner_id: number;
+  identifier: string;
+  private_key: string;
+  referral_code: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface ResponseData {
+  user: User;
+}
 
 export default function TotalReferral() {
-  const storedResponse = JSON.parse(
+  const storedResponse: ResponseData = JSON.parse(
     localStorage.getItem("responseData") || "{}"
   );
 

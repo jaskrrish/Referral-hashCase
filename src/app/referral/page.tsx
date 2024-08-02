@@ -17,10 +17,27 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowRight } from "lucide-react";
 
+interface User {
+  badges: string;
+  id: number;
+  email: string;
+  eth_wallet_address: string;
+  owner_id: number;
+  identifier: string;
+  private_key: string;
+  referral_code: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface ResponseData {
+  user: User;
+}
+
 export default function Referral() {
   const router = useRouter();
   const [referralCode, setReferralCode] = useState("");
-  const storedResponse = JSON.parse(
+  const storedResponse: ResponseData = JSON.parse(
     localStorage.getItem("responseData") || "{}"
   );
 

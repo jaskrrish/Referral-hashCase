@@ -52,7 +52,6 @@ export default function Signup() {
         { headers }
       );
       console.log("Signup success", response.data);
-      console.log(response.data.user.referral_code);
       localStorage.setItem("responseData", JSON.stringify(response.data));
       context.setUser({
         id: response.data.user.id,
