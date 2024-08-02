@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppWrapper } from "@/context";
 import { BackgroundBeams } from "@/components/ui/background-beams";
-import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +19,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Header /> */}
         <AppWrapper>{children}</AppWrapper>
         <BackgroundBeams />
       </body>

@@ -28,7 +28,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { AppContext } from "@/context";
 import { ArrowRight } from "lucide-react";
 
-export default function ReferralPage() {
+export default function Referral() {
   const router = useRouter();
   const context = useContext(AppContext);
   const [referralCode, setReferralCode] = useState("");
@@ -39,6 +39,7 @@ export default function ReferralPage() {
   console.log(storedResponse);
 
   const [tableData, setTableData] = useState([]);
+  console.log(tableData);
   console.log(tableData.length);
 
   function notify(message: string) {
