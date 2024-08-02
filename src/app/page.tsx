@@ -1,17 +1,12 @@
 "use client";
-import { useContext, useState } from "react";
-import { AppContext } from "@/context";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { Copy } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import HashCaseTextLogo from "../../public/hashcaselogo.png";
 
 export default function Home() {
-  const context = useContext(AppContext);
-  const router = useRouter();
   const storedResponse = JSON.parse(
     localStorage.getItem("responseData") || "{}"
   );
